@@ -43,6 +43,6 @@ changes:
 annotations:
   headlamp/plugin/archive-url: >-
     https://github.com/headlamp-k8s/plugins/releases/download/kueue-0.1.0-alpha/headlamp-k8s-kueue-0.1.0-alpha.tar.gz
-  headlamp/plugin/archive-checksum: SHA256:TBD
+  headlamp/plugin/archive-checksum: SHA256:0c0b6e93844362aa262e602a0b6fd9feedecb6e7709dae443be48a3cab0cdca4
   headlamp/plugin/version-compat: ">=0.22"
   headlamp/plugin/distro-compat: in-cluster,web,docker-desktop,desktop
