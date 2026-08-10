@@ -1,0 +1,43 @@
+name: Temporary Kueue release package
+
+on:
+  push:
+    branches:
+      - kueue-0.1.0-alpha-release
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./kueue
+    steps:
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9c9046686e706e
+
+      - name: Use Node.js 22
+        uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8
+        with:
+          node-version: 22.x
+          cache: npm
+          cache-dependency-path: kueue/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Package plugin
+        run: npm run package
+
+      - name: Show package and SHA-256
+        run: |
+          ls -lh *.tar.gz
+          sha256sum *.tar.gz
+
+      - name: Upload package
+        uses: actions/upload-artifact@v4
+        with:
+          name: kueue-0.1.0-alpha-package
+          path: kueue/*.tar.gz
+          if-no-files-found: error
